@@ -1,0 +1,38 @@
+.product {
+	display: flex;
+	border-bottom: 1px solid lightgray;
+	padding: 20px 0;
+}
+
+.product-img {
+	margin-right: 20px;
+}
+
+.product-img img {
+	object-fit: cover;
+}
+
+.product-title {
+	color: blue;
+	font-weight: 400;
+}
+
+.product-info-wrapper {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.cart-btn {
+	padding: 4px 54px;
+	background: goldenrod;
+	border: 1px solid gray;
+	cursor: pointer;
+}
+
+.fa-star {
+	color: gold;
+}
+
+.features-list li {
+	color: gray;
+}

@@ -1,0 +1,10 @@
+.price-container {
+	width: 80%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+}
+
+.price-container p {
+	margin: 4px 0;
+}

@@ -1,0 +1,32 @@
+header {
+	text-align: center;
+	position: fixed;
+	width: 100%;
+	top: 0%;
+	left: 0%;
+	background: lightgray;
+	z-index: 100;
+}
+
+header img {
+	width: 250px;
+	margin: 8px 0;
+}
+
+nav {
+	background: #101010;
+	text-align: left;
+}
+
+nav a {
+	display: inline-block;
+	text-decoration: none;
+	margin: 0 16px;
+	padding: 8px 12px;
+	font-size: 20px;
+	color: #ffffff;
+}
+
+nav a:hover {
+	background: #6e6c6c;
+}

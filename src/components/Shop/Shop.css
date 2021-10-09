@@ -1,0 +1,36 @@
+.search-field {
+	width: 100%;
+	background: gray;
+	text-align: center;
+	padding: 4px 0;
+	position: fixed;
+	z-index: 100;
+}
+
+.search-field input {
+	font-size: 16px;
+	padding: 4px 16px;
+	width: 40%;
+	border: 1px solid lightslategray;
+	border-radius: 4px;
+	outline: none;
+}
+
+.shop-container {
+	padding-top: 36px;
+	position: relative;
+	display: grid;
+	grid-template-columns: 3fr 1fr;
+}
+
+.product-container {
+	padding-left: 100px;
+	border-right: 1px solid lightgray;
+	padding-right: 28px;
+}
+
+.cart-container {
+	position: fixed;
+	width: 25vw;
+	left: 75%;
+}

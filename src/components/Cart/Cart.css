@@ -1,0 +1,10 @@
+.cart {
+	text-align: center;
+}
+
+.grand-total p {
+	color: brown;
+	font-weight: bold;
+	font-size: 20px;
+	letter-spacing: 1px;
+}
