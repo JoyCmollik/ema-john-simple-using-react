@@ -20,7 +20,6 @@ const useCart = () => {
 		})
 			.then((response) => response.json())
 			.then((products) => {
-				console.log(products);
 				if (products.length) {
 					const newCart = [];
 					for (const key in savedCart) {
@@ -31,8 +30,6 @@ const useCart = () => {
 						// set quantity
 						const quantity = parseInt(savedCart[key]);
 						addedProduct.quantity = quantity;
-						console.log('key', key);
-						console.log('quantity', addedProduct.quantity);
 						newCart.push(addedProduct);
 					}
 					setCart(newCart);
