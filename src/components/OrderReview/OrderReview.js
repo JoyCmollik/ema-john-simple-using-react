@@ -5,15 +5,23 @@ import Cart from '../Cart/Cart';
 import ReviewItem from '../ReviewItem/ReviewItem';
 import { deleteFromDb } from '../../utilities/fakedb';
 import '../Shop/Shop.css';
+import { useHistory } from 'react-router-dom';
 
 const OrderReview = () => {
 	const [products] = useProducts();
 	const [cart, setCart] = useCart(products);
+	const history = useHistory();
 
 	const handleRemoveItem = (productKey) => {
 		const newCart = cart.filter((cartItem) => cartItem.key !== productKey);
 		setCart(newCart);
 		deleteFromDb(productKey);
+	};
+
+	const handlePlaceOrder = () => {
+		// clearTheCart();
+		// setCart([]);
+		history.push('/shipping');
 	};
 
 	return (
@@ -28,7 +36,11 @@ const OrderReview = () => {
 				))}
 			</div>
 			<div className='cart-container'>
-				<Cart cart={cart} />
+				<Cart cart={cart}>
+					<button onClick={handlePlaceOrder} className='cart-btn'>
+						Proceed to shipping
+					</button>
+				</Cart>
 			</div>
 		</div>
 	);

@@ -25,7 +25,7 @@
 .cart-btn {
 	padding: 4px 54px;
 	background: goldenrod;
-	border: 1px solid gray;
+	border-radius: 4px;
 	cursor: pointer;
 }
 

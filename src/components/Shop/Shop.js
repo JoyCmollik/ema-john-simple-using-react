@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import useCart from '../../hooks/useCart';
 import useProducts from '../../hooks/useProducts';
 import { addToDb, getStoredCart } from '../../utilities/fakedb';
@@ -8,13 +9,28 @@ import './Shop.css';
 
 const Shop = () => {
 	const [products] = useProducts([]);
-	const [prevCart] = useCart(products);
+	const [prevCart] = useCart();
 	const [cart, setCart] = useState([]);
 	const [displayProducts, setDisplayProducts] = useState([]);
+	const history = useHistory();
+
+	// pagination
+	const [pageCount, setPageCount] = useState(0);
+	const [pageNumber, setPageNumber] = useState(0);
+	let size = 10;
 
 	useEffect(() => {
-		setDisplayProducts(products);
-	}, [products]);
+		fetch(`http://localhost:5000/products?page=${pageNumber}&&size=${size}`)
+			.then((response) => response.json())
+			.then((data) => {
+				setDisplayProducts(data.products);
+
+				// pagination codes
+				const count = data.count;
+				const pageNumber = Math.ceil(count / size);
+				setPageCount(pageNumber);
+			});
+	}, [pageNumber]);
 
 	useEffect(() => {
 		setCart(prevCart);
@@ -23,10 +39,10 @@ const Shop = () => {
 	// add to cart handler
 	const handleAddToCart = (product) => {
 		const itemExist = cart.find((pd) => pd.key === product.key);
-		let newCart = [];
+		let newCart;
 
 		if (itemExist) {
-			product.quantity += 1;
+			itemExist.quantity += 1;
 			newCart = [...cart];
 		} else {
 			product.quantity = 1;
@@ -35,6 +51,7 @@ const Shop = () => {
 
 		setCart(newCart);
 		addToDb(product.key);
+		alert('your item added successfully!');
 	};
 
 	const handleSearch = (e) => {
@@ -43,6 +60,10 @@ const Shop = () => {
 			product.name.toLowerCase().includes(searchInput.toLowerCase())
 		);
 		setDisplayProducts(filteredProducts);
+	};
+
+	const handleReviewOrders = () => {
+		history.push('/orders');
 	};
 
 	return (
@@ -56,16 +77,39 @@ const Shop = () => {
 			</div>
 			<div className='shop-container'>
 				<div className='product-container'>
-					{displayProducts.map((product) => (
-						<Product
-							key={product.key}
-							product={product}
-							handleAddToCart={handleAddToCart}
-						/>
-					))}
+					{displayProducts &&
+						displayProducts.map((product) => (
+							<Product
+								key={product.key}
+								product={product}
+								handleAddToCart={handleAddToCart}
+							/>
+						))}
+
+					{/* pagination */}
+					<div className='pagination'>
+						{[...Array(pageCount).keys()].map((number) => (
+							<button
+								className={
+									pageNumber === number ? 'selected' : ''
+								}
+								key={number}
+								onClick={() => setPageNumber(number)}
+							>
+								{number + 1}
+							</button>
+						))}
+					</div>
 				</div>
 				<div className='cart-container'>
-					<Cart cart={cart} />
+					<Cart cart={cart}>
+						<button
+							onClick={handleReviewOrders}
+							className='cart-btn'
+						>
+							review orders
+						</button>
+					</Cart>
 				</div>
 			</div>
 		</div>

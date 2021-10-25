@@ -29,6 +29,32 @@
 	padding-right: 28px;
 }
 
+.pagination {
+	margin: 40px;
+}
+
+.pagination button {
+	padding: 8px 16px;
+	background: black;
+	font-weight: 500;
+	border: none;
+	border-right: 1px solid gray;
+	color: lightgray;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: all 0.01s ease-in;
+}
+
+.pagination button:hover {
+	background: lightgray;
+	color: black;
+}
+
+.pagination .selected {
+	background: lightgray;
+	color: black;
+}
+
 .cart-container {
 	position: fixed;
 	width: 25vw;

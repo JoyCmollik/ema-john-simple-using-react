@@ -33,6 +33,7 @@ const Cart = (props) => {
 					price={itemPrice + shippingPrice + taxPrice}
 				/>
 			</div>
+			{cart.length ? props.children : ''}
 		</div>
 	);
 };
